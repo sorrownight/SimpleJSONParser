@@ -39,7 +39,7 @@ public class JSONParser
     public void exportJSON(String path) throws IOException, IllegalAccessException
     {
         PrintWriter writer = new PrintWriter(new FileWriter(path));
-        writer.print(objectToJSON());
+        writer.print(objectToJSON().replace("\n","\\n"));
         writer.close();
     }
 
@@ -76,7 +76,7 @@ public class JSONParser
 
         else if (  v.getClass().equals(String.class)
                 || v.getClass().equals(Character.class)) // String format: "Field_Name": "Value"
-            s.append("\"").append(v).append("\",");
+            s.append("\"").append((v)).append("\",");
 
         else if (v.getClass().isArray()) // Array format: [Object, Object, Object]
         {
@@ -96,3 +96,4 @@ public class JSONParser
         return s.toString();
     }
 }
+
